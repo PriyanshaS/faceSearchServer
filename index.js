@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 
 const app = express();
-const PORT =  3000;
+const PORT =  process.env.PORT || 3000;
 
 // MongoDB Atlas connection URI
 const uri = 'mongodb+srv://priyansha2024cs1044:b9qDVvWC0BqfWLWH@picture.up3nspo.mongodb.net/?retryWrites=true&w=majority&appName=picture';
