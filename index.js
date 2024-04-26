@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT =  3000;
 
 // MongoDB Atlas connection URI
 const uri = 'mongodb+srv://priyansha2024cs1044:b9qDVvWC0BqfWLWH@picture.up3nspo.mongodb.net/?retryWrites=true&w=majority&appName=picture';
@@ -33,9 +33,9 @@ connectToMongoDB();
 // Upload endpoint
 app.post('/upload', upload.single('picture'), async (req, res) => {
     try {
-        const fileBuffer = req.file.buffer; // Get file buffer
-        const db = client.db(); // Get database from client
-        const collection = db.collection('picture'); // Get collection
+        const fileBuffer = req.file.buffer; 
+        const db = client.db('picture');
+        const collection = db.collection('picture'); 
 
         // Insert image data into MongoDB
         const result = await collection.insertOne({ image: fileBuffer });
@@ -49,14 +49,11 @@ app.post('/upload', upload.single('picture'), async (req, res) => {
 // Endpoint for serving random pictures
 app.get('/get-picture', async (req, res) => {
     try {
-        const db = client.db(); // Get database from client
+        const db = client.db('picture'); // Get database from client
         const collection = db.collection('picture'); // Get collection
 
         // Query image data from MongoDB
         const result = await collection.find({}).toArray();
-
-        // Send array of image data as response
-        print(result);
         res.json(result);
     } catch (err) {
         console.error(err);
