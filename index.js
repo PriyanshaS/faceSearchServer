@@ -35,7 +35,7 @@ app.post('/upload', upload.single('picture'), async (req, res) => {
     try {
         const fileBuffer = req.file.buffer; // Get file buffer
         const db = client.db(); // Get database from client
-        const collection = db.collection('images'); // Get collection
+        const collection = db.collection('picture'); // Get collection
 
         // Insert image data into MongoDB
         const result = await collection.insertOne({ image: fileBuffer });
@@ -50,7 +50,7 @@ app.post('/upload', upload.single('picture'), async (req, res) => {
 app.get('/get-picture', async (req, res) => {
     try {
         const db = client.db(); // Get database from client
-        const collection = db.collection('images'); // Get collection
+        const collection = db.collection('picture'); // Get collection
 
         // Query image data from MongoDB
         const result = await collection.find({}).toArray();
